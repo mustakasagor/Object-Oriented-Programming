@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+class student {
+    int rollNo;
+    static int studentCount;
+
+public:
+    student(int r) {
+        rollNo = r;
+        studentCount++;
+    }
+    void display() {
+        cout << "Roll No : " << rollNo << endl;
+    }
+    static void showCount() {
+        cout << "Total Students : " << studentCount << endl;
+    }
+};
+
+int student::studentCount = 0;
+
+int main() {
+    
+    student s1(101);
+    student s2(102);
+    student s3(103);
+    student s4(104);
+
+    s1.display();
+    s2.display();
+    s3.display();
+    s4.display();
+
+    student::showCount();
+
+    return 0;
+}
