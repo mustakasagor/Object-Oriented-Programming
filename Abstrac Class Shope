@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual double area() const = 0;
+    virtual double perimeter() const = 0;
+    virtual ~Shape() = default;
+};
+
+class Rectangle : public Shape {
+    double length, breadth;
+public:
+    Rectangle(double l, double b) : length(l), breadth(b) {}
+
+    double area() const override {
+        return length * breadth;
+    }
+
+    double perimeter() const override {
+        return 2 * (length + breadth);
+    }
+};
+
+class Circle : public Shape {
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+
+    double perimeter() const override {
+        return 2 * 3.14159 * radius;
+    }
+};
+
+void CompareArea(const Shape* s1, const Shape* s2) {
+    double a1 = s1->area();
+    double a2 = s2->area();
+
+    if (a1 > a2)
+        cout << "First shape has larger area.\n";
+    else if (a2 > a1)
+        cout << "Second shape has larger area.\n";
+    else
+        cout << "Both shapes have equal area.\n";
+}
+
+int main() {
+    double length, breadth, radius;
+
+    cout << "Enter Length and Breadth of The Rectangle: ";
+    cin >> length >> breadth;
+
+    cout << "Enter Radius of The Circle: ";
+    cin >> radius;
+
+    Rectangle rect(length, breadth);
+    Circle cir(radius);
+
+    cout << "Rectangle: Area = " << rect.area()
+         << ", Perimeter = " << rect.perimeter() << '\n';
+
+    cout << "Circle: Area = " << cir.area()
+         << ", Perimeter = " << cir.perimeter() << '\n';
+
+    CompareArea(&rect, &cir);
+
+    return 0;
+}
