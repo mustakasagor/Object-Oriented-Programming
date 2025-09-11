@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+class Notification {
+public:
+    virtual void sendMessage(string msg) {
+        cout << "Notification: " << msg << endl;
+    }
+    virtual ~Notification() {}
+};
+
+class EmailNotification : public Notification {
+public:
+    void sendMessage(string msg) override {
+        cout << "Email Sent: " << msg << endl;
+    }
+};
+
+class SMSNotification : public Notification {
+public:
+    void sendMessage(string msg) override {
+        cout << "SMS Sent: " << msg << endl;
+    }
+};
+
+int main() {
+    Notification* n1 = new EmailNotification();
+    Notification* n2 = new SMSNotification();
+
+    n1->sendMessage("Meeting at 10 AM");
+    n2->sendMessage("Your OTP is 123456");
+
+    delete n1;
+    delete n2;
+
+    return 0;
+}
