@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+class Payment {
+public:
+
+    virtual void payment(double amount) {
+        cout << "Processing payment of " << amount << endl;
+    }
+
+    virtual ~Payment() {}
+};
+
+class CreditCardPayment : public Payment {
+public:
+    void payment(double amount) override {
+        cout << "Paid " << amount << " using Credit Card" << endl;
+    }
+};
+
+class UPIPayment : public Payment {
+public:
+    void payment(double amount) override {
+        cout << "Paid " << amount << " using UPI" << endl;
+    }
+};
+
+int main() {
+    Payment* P;
+
+    P = new CreditCardPayment();
+    P->payment(500);
+    delete P;
+
+    P = new UPIPayment();
+    P->payment(1000);
+    delete P;
+    return 0;
+}
