@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account {
+protected:
+    string name;
+    double balance;
+
+public:
+    Account(string n, double b) : name(n), balance(b) {}
+
+    void deposit(double amount) {
+        balance += amount;
+        cout << "Deposited " << amount << ", New Balance = " << balance << endl;
+    }
+
+    void deposit(double amount, string chequeNo) {
+        balance += amount;
+        cout << "Deposited " << amount << " via Cheque No. " << chequeNo << ", New Balance = " << balance << endl;
+    }
+
+    virtual void showDetails() const {
+        cout << "Account Holder: " << name << ", Balance: " << balance << endl;
+    }
+};
+
+class SavingAccount : public Account {
+public:
+    SavingAccount(string n, double b) : Account(n, b) {}
+
+    void showDetails() const override {
+        cout << "Saving Account Holder: " << name << ", Balance: " << balance << endl;
+    }
+};
+
+class CurrentAccount : public Account {
+public:
+    CurrentAccount(string n, double b) : Account(n, b) {}
+
+    void showDetails() const override {
+        cout << "Current Account Holder: " << name << ", Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    
+    Account* acc;
+
+    acc = new SavingAccount("Mustak", 1000);
+    acc->deposit(500);
+    acc->deposit(1500, "0Ab229038");
+    acc->showDetails();
+    delete acc;
+
+    acc = new CurrentAccount("Jit", 500);
+    acc->deposit(200);
+    acc->showDetails();
+    delete acc;
+
+    return 0;
+}
