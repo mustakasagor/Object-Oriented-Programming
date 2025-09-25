@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+    class student{
+        string name;
+        int age;
+        public:
+        student(string n= " ", int a=0): name(n), age(a){}
+        friend istream& operator>>(istream& in, student& s){
+            cout<<"Enter Name: ";
+            in>> s.name;
+            cout<<"Enter Age: ";
+            in>> s.age;
+            return in;
+        }
+        friend ostream& operator<<(ostream& out, student& s){
+            out<<"Name: "<< s.name<<" \nAge: "<<s.age;
+            return out;
+        }
+    };
+    
+   int main(){
+        student s1;
+        cin>>s1;
+        cout<<"Student Details :"<<endl<<s1<<endl;
+        return 0;
+
+}
